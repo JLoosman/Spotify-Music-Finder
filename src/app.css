@@ -1,0 +1,11 @@
+:root {
+  --primary: #1DB954;
+  --secondary: #E8FFED;
+  --background: #1C1C1C;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
