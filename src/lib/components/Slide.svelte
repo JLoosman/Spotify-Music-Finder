@@ -1,14 +1,24 @@
-<div class="container">
+<script>
+  export let imageUrl = "";
+  export let name = "";
+  export let artist = "";
+
+  let isHidden = false;
+
+  const handleClick = () => {
+    console.log("clicked");
+    isHidden = !isHidden;
+  };
+</script>
+
+<div class="container" class:hidden={isHidden}>
   <div class="card">
-    <img
-      src="https://i.pinimg.com/originals/b9/02/9f/b9029f0ae9156ffacaa47965e15b1405.jpg"
-      alt=""
-    />
-    <h2>Birds in the trap</h2>
-    <p>Travis Scott</p>
+    <img src={imageUrl} alt="Album cover" />
+    <h2>{name.slice(0, 20)}</h2>
+    <p>{artist}</p>
   </div>
   <div class="buttons">
-    <div class="button">
+    <button class="button" on:click={handleClick}>
       <svg
         width="256px"
         height="256px"
@@ -29,7 +39,7 @@
           /></g
         ></svg
       >
-    </div>
+    </button>
     <div class="button">
       <svg
         width="256px"
@@ -75,9 +85,12 @@
   .container {
     display: flex;
     flex-direction: column;
-    align-content: center;
+    align-items: center;
     justify-content: center;
-    height: 100%;
+  }
+
+  .hidden {
+    display: none;
   }
 
   .card {
@@ -88,6 +101,8 @@
     background: var(--secondary);
     border-radius: 20px;
     padding: 20px;
+    max-width: 350px;
+    box-shadow: 10px 0px 10px -10px rgba(0, 0, 0, 20%);
   }
 
   .card > img {
@@ -96,7 +111,9 @@
     margin-bottom: 20px;
   }
 
-  .card > h2,
+  .card > h2 {
+    height: 34px;
+  }
   .card > p {
     margin: 10px;
   }
@@ -118,6 +135,7 @@
     height: 100%;
     padding: 10px;
     background-color: var(--secondary);
+    border: none;
     border-radius: 30px;
   }
 </style>

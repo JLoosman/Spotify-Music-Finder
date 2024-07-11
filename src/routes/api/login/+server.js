@@ -2,8 +2,11 @@ import 'dotenv/config'
 import { redirect } from '@sveltejs/kit'
 
 
-export const GET = () => {
+export const GET = ({ cookies }) => {
 
+  if (cookies.get("access_token") && cookies.get("access_token") !== 'undefined') {
+    throw redirect(302, "/")
+  }
   const CLIENT_ID = process.env.CLIENT_ID;
 
   let url = new URL('https://accounts.spotify.com/authorize?') + new URLSearchParams({
