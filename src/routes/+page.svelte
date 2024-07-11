@@ -4,6 +4,9 @@
   <a href="api/login">
     <button>Login</button>
   </a>
+  <a href="api/logout">
+    <button>Logout</button>
+  </a>
 </div>
 
 <style>
