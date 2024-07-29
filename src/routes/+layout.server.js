@@ -31,7 +31,7 @@ export const load = async ({ cookies, fetch }) => {
         client_id: CLIENT_ID
       })
     })
-    console.log(response)
+    // console.log(response)
     const data = await response.json()
     return data
   }

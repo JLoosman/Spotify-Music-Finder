@@ -1,12 +1,35 @@
 <script>
+  export let songURI = "";
   export let imageUrl = "";
   export let name = "";
   export let artist = "";
 
   let isHidden = false;
 
-  const handleClick = () => {
-    console.log("clicked");
+  const handleRemove = () => {
+    console.log("deleted");
+    isHidden = !isHidden;
+  };
+
+  const handlePlay = () => {
+    console.log("played");
+  };
+
+  const handleAdd = async () => {
+    const playlist = await fetch("/api/playlist/create");
+    const playlistID = await playlist.json();
+
+    await fetch("/api/playlist/add", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        songURI: songURI,
+        playlistID: playlistID,
+      }),
+    });
+
     isHidden = !isHidden;
   };
 </script>
@@ -18,7 +41,7 @@
     <p>{artist}</p>
   </div>
   <div class="buttons">
-    <button class="button" on:click={handleClick}>
+    <button on:click={handleRemove}>
       <svg
         width="256px"
         height="256px"
@@ -40,7 +63,7 @@
         ></svg
       >
     </button>
-    <button class="button">
+    <button on:click={handlePlay}>
       <svg
         width="256px"
         height="256px"
@@ -59,7 +82,7 @@
         ></svg
       >
     </button>
-    <button class="button">
+    <button on:click={handleAdd}>
       <svg
         width="256px"
         height="256px"
