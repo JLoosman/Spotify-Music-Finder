@@ -1,4 +1,5 @@
 <script>
+  export let index;
   export let songURI = "";
   export let imageUrl = "";
   export let name = "";
@@ -16,6 +17,7 @@
   };
 
   const handleAdd = async () => {
+    isHidden = !isHidden;
     const playlist = await fetch("/api/playlist/create");
     const playlistID = await playlist.json();
 
@@ -29,14 +31,16 @@
         playlistID: playlistID,
       }),
     });
-
-    isHidden = !isHidden;
   };
 </script>
 
 <div class="container" class:hidden={isHidden}>
   <div class="card">
-    <img src={imageUrl} alt="Album cover" />
+    <img
+      src={imageUrl}
+      alt="Album cover"
+      loading={index === 49 || index === 48 ? "eager" : "lazy"}
+    />
     <h2>{name.slice(0, 20)}</h2>
     <p>{artist}</p>
   </div>
@@ -125,7 +129,6 @@
     border-radius: 20px;
     padding: 20px;
     max-width: 350px;
-    box-shadow: 10px 0px 10px -10px rgba(0, 0, 0, 20%);
   }
 
   .card > img {

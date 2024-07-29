@@ -2,14 +2,13 @@
   import Slide from "$lib/components/Slide.svelte";
 
   export let data;
-
-  let cutData = data.tracks.slice(0, 4).reverse();
 </script>
 
 <div class="center">
-  {#each data.tracks as { track }}
+  {#each data.tracks as { track }, i}
     <div class="stackItem">
       <Slide
+        index={i}
         songURI={track.uri}
         imageUrl={track.album.images[0].url}
         name={track.name}
@@ -22,13 +21,15 @@
 <style>
   .center {
     position: relative;
-    height: 100%;
+    height: 100vh;
     width: 100%;
-    margin: 100px auto;
-    padding: 30px 40vw;
   }
 
   .stackItem {
     position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+
+    margin-top: 200px;
   }
 </style>

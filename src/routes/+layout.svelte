@@ -15,7 +15,6 @@
     color: var(--secondary);
   }
   main {
-    height: 100vh;
     background-color: var(--background);
   }
 </style>
