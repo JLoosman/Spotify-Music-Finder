@@ -16,7 +16,7 @@ export const GET = async ({ url, cookies }) => {
     },
     body: new URLSearchParams({
       code: code,
-      redirect_uri: 'http://localhost:5173/api/callback',
+      redirect_uri: 'http://localhost:5173/api/auth/callback',
       grant_type: 'authorization_code'
     })
   }

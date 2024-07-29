@@ -40,7 +40,7 @@
         ></svg
       >
     </button>
-    <div class="button">
+    <button class="button">
       <svg
         width="256px"
         height="256px"
@@ -58,8 +58,8 @@
           /></g
         ></svg
       >
-    </div>
-    <div class="button">
+    </button>
+    <button class="button">
       <svg
         width="256px"
         height="256px"
@@ -77,7 +77,7 @@
           /></g
         ></svg
       >
-    </div>
+    </button>
   </div>
 </div>
 
@@ -131,7 +131,7 @@
     width: 300px;
   }
 
-  .button {
+  button {
     height: 100%;
     padding: 10px;
     background-color: var(--secondary);

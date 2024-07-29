@@ -1,10 +1,10 @@
 <div class="container">
   <h1>Find new Music</h1>
   <p>A simple application for finding new music</p>
-  <a href="api/login">
+  <a href="api/auth/login">
     <button>Login</button>
   </a>
-  <a href="api/logout">
+  <a href="api/auth/logout">
     <button>Logout</button>
   </a>
 </div>

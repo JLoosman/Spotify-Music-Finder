@@ -13,7 +13,7 @@ export const GET = ({ cookies }) => {
     response_type: 'code',
     client_id: CLIENT_ID,
     scope: 'user-read-private user-read-email user-top-read',
-    redirect_uri: 'http://localhost:5173/api/callback'
+    redirect_uri: 'http://localhost:5173/api/auth/callback'
   })
 
   console.log(url)
