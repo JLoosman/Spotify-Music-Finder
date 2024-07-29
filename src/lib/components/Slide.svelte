@@ -4,8 +4,15 @@
   export let imageUrl = "";
   export let name = "";
   export let artist = "";
+  export let preview = "";
 
   let isHidden = false;
+  let isPlaying = false;
+  let previewAudio;
+
+  if (typeof Audio != "undefined") {
+    previewAudio = new Audio(preview);
+  }
 
   const handleRemove = () => {
     console.log("deleted");
@@ -14,6 +21,15 @@
 
   const handlePlay = () => {
     console.log("played");
+
+    if (previewAudio.paused) {
+      console.log("paused");
+      previewAudio.play();
+      isPlaying = true;
+    } else {
+      previewAudio.pause();
+      isPlaying = false;
+    }
   };
 
   const handleAdd = async () => {
@@ -68,23 +84,55 @@
       >
     </button>
     <button on:click={handlePlay}>
-      <svg
-        width="256px"
-        height="256px"
-        viewBox="0 0 16 16"
-        fill="currentColor"
-        x="128"
-        y="128"
-        role="img"
-        style="display:inline-block;vertical-align:middle"
-        xmlns="http://www.w3.org/2000/svg"
-        ><g fill="currentColor"
-          ><path
+      {#if !isPlaying}
+        <svg
+          width="256px"
+          height="256px"
+          viewBox="0 0 16 16"
+          fill="currentColor"
+          x="128"
+          y="128"
+          role="img"
+          style="display:inline-block;vertical-align:middle"
+          xmlns="http://www.w3.org/2000/svg"
+          ><g fill="currentColor"
+            ><path
+              fill="currentColor"
+              d="m11.596 8.697l-6.363 3.692c-.54.313-1.233-.066-1.233-.697V4.308c0-.63.692-1.01 1.233-.696l6.363 3.692a.802.802 0 0 1 0 1.393z"
+            /></g
+          ></svg
+        >
+      {/if}
+      {#if isPlaying}
+        <svg
+          width="256px"
+          height="256px"
+          viewBox="0 0 512 512"
+          style="color:currentColor"
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-full w-full"
+          ><svg
+            width="256px"
+            height="256px"
+            viewBox="0 0 24 24"
             fill="currentColor"
-            d="m11.596 8.697l-6.363 3.692c-.54.313-1.233-.066-1.233-.697V4.308c0-.63.692-1.01 1.233-.696l6.363 3.692a.802.802 0 0 1 0 1.393z"
-          /></g
-        ></svg
-      >
+            x="128"
+            y="128"
+            role="img"
+            style="display:inline-block;vertical-align:middle"
+            xmlns="http://www.w3.org/2000/svg"
+            ><g fill="currentColor"
+              ><path
+                fill="none"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-width="2"
+                d="M7 5v14M17 5v14"
+              /></g
+            ></svg
+          ></svg
+        >
+      {/if}
     </button>
     <button on:click={handleAdd}>
       <svg

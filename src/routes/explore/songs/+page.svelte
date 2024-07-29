@@ -2,6 +2,8 @@
   import Slide from "$lib/components/Slide.svelte";
 
   export let data;
+
+  console.log(data.tracks[0].track.preview_url);
 </script>
 
 <div class="center">
@@ -13,6 +15,7 @@
         imageUrl={track.album.images[0].url}
         name={track.name}
         artist={track.artists[0].name}
+        preview={track.preview_url}
       />
     </div>
   {/each}
