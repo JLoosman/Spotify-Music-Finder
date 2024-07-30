@@ -1,4 +1,6 @@
 <script>
+  import { Howl, Howler } from "howler";
+
   export let index;
   export let songURI = "";
   export let imageUrl = "";
@@ -10,6 +12,12 @@
   let isPlaying = false;
   let previewAudio;
 
+  let sound = new Howl({
+    src: [preview],
+    html5: true,
+  });
+  sound.volume(0.5);
+
   if (typeof Audio != "undefined") {
     previewAudio = new Audio(preview);
   }
@@ -20,15 +28,13 @@
   };
 
   const handlePlay = () => {
-    console.log("played");
-
-    if (previewAudio.paused) {
-      console.log("paused");
-      previewAudio.play();
-      isPlaying = true;
-    } else {
-      previewAudio.pause();
+    console.log(sound.playing());
+    if (sound.playing()) {
+      sound.pause();
       isPlaying = false;
+    } else {
+      sound.play();
+      isPlaying = true;
     }
   };
 
