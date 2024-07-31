@@ -1,15 +1,11 @@
 <script>
   import { page } from "$app/stores";
 
-  console.log($page.url.pathname);
-
   let urlArr = [];
   let url = "";
 
   $: urlArr = $page.url.pathname.split("/");
   $: url = urlArr[urlArr.length - 1];
-
-  $: console.log(url);
 </script>
 
 <div class="container">
@@ -39,6 +35,8 @@
   }
 
   .right {
+    position: relative;
+    height: 100vh;
     width: 100vw;
   }
 

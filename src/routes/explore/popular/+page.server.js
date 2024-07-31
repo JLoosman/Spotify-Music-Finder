@@ -1,5 +1,4 @@
 
-
 export const load = async ({ fetch, cookies }) => {
   const chartsPlaylistID = "37i9dQZEVXbNG2KDcFcKOF"
 
