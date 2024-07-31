@@ -10,17 +10,12 @@
 
   let isHidden = false;
   let isPlaying = false;
-  let previewAudio;
 
   let sound = new Howl({
     src: [preview],
     html5: true,
   });
   sound.volume(0.5);
-
-  if (typeof Audio != "undefined") {
-    previewAudio = new Audio(preview);
-  }
 
   const handleRemove = () => {
     console.log("deleted");

@@ -4,8 +4,10 @@
 </script>
 
 <main>
+  <!--
   <h1>{data.access_token}</h1>
   <h1>{data.refresh_token}</h1>
+  -->
   <slot />
 </main>
 
