@@ -15,7 +15,7 @@
     </a>
   {/if}
   {#if loggedIn}
-    <a href="explore/songs">
+    <a href="explore/popular">
       <button>Explore</button>
     </a>
   {/if}
