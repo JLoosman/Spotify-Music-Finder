@@ -1,4 +1,5 @@
 <script>
+  import { createEventDispatcher } from "svelte";
   import { Howl, Howler } from "howler";
 
   export let index;
@@ -11,14 +12,23 @@
   let isHidden = false;
   let isPlaying = false;
 
+  const dispatch = createEventDispatcher();
+
   let sound = new Howl({
     src: [preview],
     html5: true,
+    onend: function () {
+      isPlaying = false;
+    },
   });
   sound.volume(0.5);
 
   const handleRemove = () => {
-    console.log("deleted");
+    dispatch("delete");
+    if (sound.playing) {
+      sound.stop();
+      isPlaying = false;
+    }
     isHidden = !isHidden;
   };
 
@@ -106,29 +116,37 @@
       {/if}
       {#if isPlaying}
         <svg
-          width="256px"
-          height="256px"
+          width="512"
+          height="512"
           viewBox="0 0 512 512"
           style="color:currentColor"
           xmlns="http://www.w3.org/2000/svg"
           class="h-full w-full"
-          ><svg
-            width="256px"
-            height="256px"
+          ><rect
+            width="512"
+            height="512"
+            x="0"
+            y="0"
+            rx="30"
+            fill="transparent"
+            stroke="transparent"
+            stroke-width="0"
+            stroke-opacity="100%"
+            paint-order="stroke"
+          ></rect><svg
+            width="512px"
+            height="512px"
             viewBox="0 0 24 24"
             fill="currentColor"
-            x="128"
-            y="128"
+            x="0"
+            y="0"
             role="img"
             style="display:inline-block;vertical-align:middle"
             xmlns="http://www.w3.org/2000/svg"
             ><g fill="currentColor"
               ><path
-                fill="none"
-                stroke="currentColor"
-                stroke-linecap="round"
-                stroke-width="2"
-                d="M7 5v14M17 5v14"
+                fill="currentColor"
+                d="M17.276 5.47c.435.16.724.575.724 1.039V17.49c0 .464-.29.879-.724 1.039a3.69 3.69 0 0 1-2.552 0A1.107 1.107 0 0 1 14 17.491V6.51c0-.464.29-.879.724-1.04a3.69 3.69 0 0 1 2.552 0Zm-8 0c.435.16.724.575.724 1.039V17.49c0 .464-.29.879-.724 1.039a3.69 3.69 0 0 1-2.552 0A1.107 1.107 0 0 1 6 17.491V6.51c0-.464.29-.879.724-1.04a3.69 3.69 0 0 1 2.552 0Z"
               /></g
             ></svg
           ></svg
@@ -196,6 +214,7 @@
   svg {
     height: 30px;
     width: 30px;
+    margin: 0;
   }
 
   .buttons {
@@ -207,7 +226,8 @@
   }
 
   button {
-    height: 100%;
+    height: 50px;
+    width: 50px;
     padding: 10px;
     background-color: var(--secondary);
     border: none;

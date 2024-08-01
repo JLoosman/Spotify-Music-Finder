@@ -6,10 +6,26 @@
 
   $: console.log(tracks);
 
+  $: tracks, addTracks();
+
   const getTracks = async (offset) => {
     const tracks = await fetch(`/api/recommendations/songs?offset=${offset}`);
 
     return tracks.json();
+  };
+
+  const addTracks = async () => {
+    if (tracks.length === 1) {
+      getTracks(1).then((value) => {
+        tracks = [...value.tracks, ...tracks];
+      });
+    }
+  };
+
+  const removeFirst = () => {
+    console.log(tracks[tracks.length - 1].name);
+    tracks.pop();
+    tracks = tracks;
   };
 
   onMount(() => {
@@ -22,6 +38,7 @@
 {#each tracks as track, i}
   <div class="item">
     <Slide
+      on:delete={removeFirst}
       index={i}
       imageUrl={track.album.images[0].url}
       name={track.name}
