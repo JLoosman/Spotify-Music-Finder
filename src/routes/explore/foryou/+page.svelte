@@ -3,6 +3,7 @@
   import { onMount } from "svelte";
 
   let tracks = [];
+  let offset = 0;
 
   $: console.log(tracks);
 
@@ -15,10 +16,12 @@
   };
 
   const addTracks = async () => {
-    if (tracks.length === 1) {
-      getTracks(1).then((value) => {
+    if (tracks.length === 2) {
+      getTracks(offset).then((value) => {
         tracks = [...value.tracks, ...tracks];
       });
+
+      offset++;
     }
   };
 
@@ -29,9 +32,10 @@
   };
 
   onMount(() => {
-    getTracks(0).then((value) => {
+    getTracks(offset).then((value) => {
       tracks = [...tracks, ...value.tracks];
     });
+    offset++;
   });
 </script>
 
