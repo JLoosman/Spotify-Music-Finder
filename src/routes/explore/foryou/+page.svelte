@@ -4,6 +4,7 @@
 
   let tracks = [];
   let offset = 0;
+  let error;
 
   $: console.log(tracks);
 
@@ -33,7 +34,12 @@
 
   onMount(() => {
     getTracks(offset).then((value) => {
-      tracks = [...tracks, ...value.tracks];
+      if (value.message) {
+        console.log(value.message);
+        error = value.message;
+      } else {
+        tracks = [...tracks, ...value.tracks];
+      }
     });
     offset++;
   });
@@ -52,7 +58,15 @@
   </div>
 {/each}
 
+{#if error}
+  <h1 class="item">{error}</h1>
+{/if}
+
 <style>
+  h1 {
+    color: #ddd;
+    margin-top: 400px !important;
+  }
   .item {
     position: absolute;
     left: 50%;

@@ -1,4 +1,4 @@
-import { json } from '@sveltejs/kit'
+import { json, error } from '@sveltejs/kit'
 
 export const GET = async ({ cookies, url }) => {
   const access_token = cookies.get("access_token")
@@ -20,12 +20,20 @@ export const GET = async ({ cookies, url }) => {
   const seed = topTracks.items[0].id
 
   const getRecommendations = async () => {
-    const recommendation = await fetch(`https://api.spotify.com/v1/recommendations?limit=5&seed_tracks=${seed}`, {
+    const recommendation = await fetch(`https://api.spotify.com/v1/recommendations?limit=10&seed_tracks=${seed}`, {
       headers: {
         'Authorization': `Bearer ${access_token}`
       }
     })
-    const data = await recommendation.json()
+
+    console.log(recommendation.status)
+    let data;
+    if (recommendation.status === 429) {
+      console.log(recommendation.headers)
+      throw error(429, "Too many requests")
+    } else {
+      data = await recommendation.json()
+    }
 
     return data
   }

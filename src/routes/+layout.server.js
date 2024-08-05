@@ -1,21 +1,10 @@
 import 'dotenv/config'
-import { redirect } from '@sveltejs/kit'
 
-export const load = async ({ cookies, fetch, url }) => {
+export const load = async ({ cookies, fetch }) => {
   let access_token = cookies.get("access_token")
   let refresh_token = cookies.get("refresh_token")
   const CLIENT_ID = process.env.CLIENT_ID
   const CLIENT_SECRET = process.env.CLIENT_SECRET
-
-  if (access_token === 'undefined' || typeof (access_token) === 'undefined') {
-    if (url.pathname !== '/') {
-      redirect(302, '/')
-    }
-    return {
-      access_token: undefined,
-      refresh_token: undefined
-    }
-  }
 
   const getProfile = async () => {
     const response = await fetch("https://api.spotify.com/v1/me", {
