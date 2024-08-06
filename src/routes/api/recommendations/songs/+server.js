@@ -26,14 +26,11 @@ export const GET = async ({ cookies, url }) => {
       }
     })
 
-    console.log(recommendation.status)
-    let data;
     if (recommendation.status === 429) {
-      console.log(recommendation.headers)
       throw error(429, "Too many requests")
-    } else {
-      data = await recommendation.json()
     }
+
+    data = await recommendation.json()
 
     return data
   }
