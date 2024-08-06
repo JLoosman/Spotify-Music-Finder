@@ -27,7 +27,6 @@
   };
 
   const removeFirst = () => {
-    console.log(tracks[tracks.length - 1].name);
     tracks.pop();
     tracks = tracks;
   };

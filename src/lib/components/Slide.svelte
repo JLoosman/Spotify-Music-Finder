@@ -9,19 +9,25 @@
   export let artist = "";
   export let preview = "";
 
+  export let isArtist = false;
+
   let isHidden = false;
   let isPlaying = false;
 
   const dispatch = createEventDispatcher();
 
-  let sound = new Howl({
-    src: [preview],
-    html5: true,
-    onend: function () {
-      isPlaying = false;
-    },
-  });
-  sound.volume(0.5);
+  let sound;
+
+  if (!isArtist) {
+    sound = new Howl({
+      src: [preview],
+      html5: true,
+      onend: function () {
+        isPlaying = false;
+      },
+    });
+    sound.volume(0.5);
+  }
 
   const handleRemove = () => {
     dispatch("delete");
@@ -33,13 +39,15 @@
   };
 
   const handlePlay = () => {
-    console.log(sound.playing());
-    if (sound.playing()) {
-      sound.pause();
-      isPlaying = false;
-    } else {
-      sound.play();
-      isPlaying = true;
+    if (!isArtist) {
+      console.log(sound.playing());
+      if (sound.playing()) {
+        sound.pause();
+        isPlaying = false;
+      } else {
+        sound.play();
+        isPlaying = true;
+      }
     }
   };
 

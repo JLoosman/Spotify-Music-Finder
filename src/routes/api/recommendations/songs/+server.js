@@ -30,7 +30,7 @@ export const GET = async ({ cookies, url }) => {
       throw error(429, "Too many requests")
     }
 
-    data = await recommendation.json()
+    let data = await recommendation.json()
 
     return data
   }

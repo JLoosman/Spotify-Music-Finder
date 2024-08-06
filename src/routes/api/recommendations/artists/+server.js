@@ -1,11 +1,11 @@
 import { json, error } from '@sveltejs/kit'
 
-export const GET = async ({ cookies }) => {
+export const GET = async ({ cookies, url }) => {
   const access_token = cookies.get("access_token")
-  const offset = 0;
+  const offset = url.searchParams.get("offset");
 
   const getTopArtists = async () => {
-    const response = await fetch(`https://api.spotify.com/v1/me/top/artists?limit=1&offset=${offset}`, {
+    const response = await fetch(`https://api.spotify.com/v1/me/top/artists?limit=5&offset=${offset}`, {
       headers: {
         'Authorization': `Bearer ${access_token}`
       }
@@ -15,8 +15,10 @@ export const GET = async ({ cookies }) => {
     return data
   }
 
+  const randomInt = Math.floor(Math.random() * 5);
+
   const topArtists = await getTopArtists()
-  const topArtistSeed = topArtists.items[0].id
+  const topArtistSeed = topArtists.items[randomInt].id
 
   const getRelatedArtists = async () => {
     const response = await fetch(`https://api.spotify.com/v1/artists/${topArtistSeed}/related-artists`, {

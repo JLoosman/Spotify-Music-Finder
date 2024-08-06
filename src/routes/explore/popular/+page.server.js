@@ -1,6 +1,7 @@
 
 export const load = async ({ fetch, cookies }) => {
-  const chartsPlaylistID = "37i9dQZEVXbNG2KDcFcKOF"
+  let chartsPlaylistID = "37i9dQZEVXbNG2KDcFcKOF"
+  chartsPlaylistID = "37i9dQZF1DXcBWIGoYBM5M"
 
   let access_token = cookies.get("access_token")
 
@@ -11,7 +12,10 @@ export const load = async ({ fetch, cookies }) => {
       }
     })
 
+
     const data = await response.json()
+
+
     return data.tracks.items
   }
 
