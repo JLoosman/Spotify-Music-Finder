@@ -49,6 +49,7 @@
     <Slide
       on:delete={removeFirst}
       index={i}
+      songURI={track.uri}
       imageUrl={track.album.images[0].url}
       name={track.name}
       artist={track.artists[0].name}
